@@ -49,24 +49,18 @@ class Customprice extends Module
 	    if (Tools::isSubmit('submit'.$this->name))
 	    {
 	        $precio_carac_nombre = strval(Tools::getValue('precio_carac_nombre'));
-	        $precio_serigrafia = strval(Tools::getValue('precio_serigrafia'));
-	        $precio_carac_num_ni = strval(Tools::getValue('precio_carac_num_ni'));
-	        $precio_carac_num_ad = strval(Tools::getValue('precio_carac_num_ad'));
+	        $precio_carac_num_ad = strval(Tools::getValue('precio_carac_num'));
 	        $carac_max = strval(Tools::getValue('carac_max'));
 	        $num_max = strval(Tools::getValue('num_max'));
 	        if (!$precio_carac_nombre  || empty($precio_carac_nombre) || !Validate::isGenericName($precio_carac_nombre) and
-	        	!$precio_serigrafia  || empty($precio_serigrafia) || !Validate::isGenericName($precio_serigrafia) and
-	        	!$precio_carac_num_ni  || empty($precio_carac_num_ni) || !Validate::isGenericName($precio_carac_num_ni) and
-	        	!$precio_carac_num_ad  || empty($precio_carac_num_ad) || !Validate::isGenericName($precio_carac_num_ad) and
+	        	!$precio_carac_num_ad  || empty($precio_carac_num) || !Validate::isGenericName($precio_carac_num_ad) and
 	        	!$carac_max  || empty($carac_max) || !Validate::isGenericName($carac_max) and
 	        	!$num_max  || empty($num_max) || !Validate::isGenericName($num_max))
 	            $output .= $this->displayError( $this->l('Invalid Configuration value') );
 	        else
 	        {
 	            Configuration::updateValue('precio_carac_nombre', $precio_carac_nombre);
-	            Configuration::updateValue('precio_serigrafia', $precio_serigrafia);
-	            Configuration::updateValue('precio_carac_num_ni', $precio_carac_num_ni);
-	            Configuration::updateValue('precio_carac_num_ad', $precio_carac_num_ad);
+	            Configuration::updateValue('precio_carac_num_ad', $precio_carac_num);
 	            Configuration::updateValue('carac_max', $carac_max);
 	            Configuration::updateValue('num_max', $num_max);
 	            $output .= $this->displayConfirmation($this->l('Settings updated'));
@@ -86,14 +80,6 @@ class Customprice extends Module
 	            'title' => $this->l('Settings'),
 	        ),
 	        'input' => array(
-	        	array(
-	                'type' => 'text',
-	                'label' => $this->l('Precio por serigrafia: '),
-	                'name' => 'precio_serigrafia',
-	                'suffix' => '€',
-	                'size' => 7,
-	                'required' => true
-	            ),
 	            array(
 	                'type' => 'text',
 	                'label' => $this->l('Precio por caracter de texto: '),
@@ -104,16 +90,8 @@ class Customprice extends Module
 	            ),
 	            array(
 	                'type' => 'text',
-	                'label' => $this->l('Precio por caracter numero niño: '),
-	                'name' => 'precio_carac_num_ni',
-	                'suffix' => '€',
-	                'size' => 7,
-	                'required' => true
-	            ),
-	            array(
-	                'type' => 'text',
-	                'label' => $this->l('Precio por caracter numero adulto: '),
-	                'name' => 'precio_carac_num_ad',
+	                'label' => $this->l('Precio por caracter numero: '),
+	                'name' => 'precio_carac_num',
 	                'suffix' => '€',
 	                'size' => 7,
 	                'required' => true
@@ -171,9 +149,7 @@ class Customprice extends Module
 	     
 	    // Load current value
 	    $helper->fields_value['precio_carac_nombre'] = Configuration::get('precio_carac_nombre');
-	    $helper->fields_value['precio_serigrafia'] = Configuration::get('precio_serigrafia');
-	    $helper->fields_value['precio_carac_num_ni'] = Configuration::get('precio_carac_num_ni');
-	    $helper->fields_value['precio_carac_num_ad'] = Configuration::get('precio_carac_num_ad');
+	    $helper->fields_value['precio_carac_num_ad'] = Configuration::get('precio_carac_num');
 	    $helper->fields_value['carac_max'] = Configuration::get('carac_max');
 	    $helper->fields_value['num_max'] = Configuration::get('num_max');
 	     
@@ -185,10 +161,8 @@ class Customprice extends Module
 
         $this->context->smarty->assign(
 	        array(
-	        	'precio_serigrafia' => Configuration::get('precio_serigrafia'),
 	            'precio_carac_nombre' => Configuration::get('precio_carac_nombre'),
-	            'precio_carac_num_ni' => Configuration::get('precio_carac_num_ni'),
-	            'precio_carac_num_ad' => Configuration::get('precio_carac_num_ad'),
+	            'precio_carac_num_ad' => Configuration::get('precio_carac_num'),
 	            'carac_max' => Configuration::get('carac_max'),
 	            'num_max' => Configuration::get('num_max')
 	        )

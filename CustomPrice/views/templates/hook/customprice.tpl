@@ -2,13 +2,6 @@
 <div id="custom-price">
   <h4>Precios por caracter:</h4>
   <div class="block_content">
-     Por la serigrafia: 
-       {if isset($precio_serigrafia) && $precio_serigrafia}
-           +{$precio_serigrafia}€
-       {else}
-           Ez dago!
-       {/if}       
-    <br>
     Cada caracter del texto: 
        {if isset($precio_carac_nombre) && $precio_carac_nombre}
            {$precio_carac_nombre}€
@@ -16,14 +9,7 @@
            Ez dago!
        {/if}       
     <br>
-    Cada caracter del numero de niño: 
-       {if isset($precio_carac_num_ni) && $precio_carac_num_ni}
-           {$precio_carac_num_ni}€
-       {else}
-           Ez dago!
-       {/if}       
-    <br>
-    Cada caracter del numero de adulto: 
+    Cada caracter del numero: 
        {if isset($precio_carac_num_ad) && $precio_carac_num_ad}
            {$precio_carac_num_ad}€
        {else}
